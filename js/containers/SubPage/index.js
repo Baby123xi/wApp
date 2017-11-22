@@ -13,15 +13,38 @@ import Header from '../../components/Header'
 export default class extends Component {
     constructor(props){
         super(props)
+        this.state={
+          
+            canGoBack: false
+        }
+    }
+
+
+    _onNavigationStateChange(e){
+        // if(e.canGoBack){
+          this.setState({
+            canGoBack: e.canGoBack,
+          
+           });
+      //  }
+    }
+     _leftBtnAction(){
+        if(!this.state.canGoBack){
+            this.props.navigation.goBack()
+        }else{
+            this.refs.WEBVIEW_REF.goBack();
+        }
     }
     render(){
-        console.log(this.props.navigation);
+        console.log(this.props.navigation.state.params.url);
         return <View style={{width,flex:1}}>
             <Header title={"待办事件"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
             <WebView
+            ref={'WEBVIEW_REF'}
             source={{uri:this.props.navigation.state.params.url}}
             style={{width}}
             startInLoadingState={true} 
+            onNavigationStateChange={(e)=>this._onNavigationStateChange(e)}
             renderLoading={()=>{
                 return  <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
                      <Text style={{fontSize:18}}>Loading...</Text>

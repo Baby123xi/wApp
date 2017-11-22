@@ -1,6 +1,8 @@
-const BASEURL="http://192.168.2.111:8888"
+const BASEURL="http://192.168.2.111:8080/#/"
+const isapp="?isApp=app";
 export default{
-   BaseUrl:BASEURL,
-   WaitEvent:BASEURL+'/waitEvent',
-   IncidentManagement:BASEURL+'/incidentManagement',
+   BaseUrl:BASEURL+isapp,
+   WaitEvent:BASEURL+"waitEvent"+isapp,
+   IncidentManagement:BASEURL+"incidentManagement"+isapp,
+   Notice:BASEURL+"Notice"+isapp
 }

@@ -51,15 +51,15 @@ export default class Grid extends Component<{}> {
         this.setState({
         imgList:[
      
-        {imgUrl:require('./img/icon_home2_03.png'),name:'待办事件',url:Url.WaitEvent},
-        {imgUrl:require('./img/icon_home3_03.png'),name:'事件上报',url:Url.IncidentManagement},
-       {imgUrl:require('./img/icon_home5_03.png'),name:'日程安排',url:Url.BaseUrl},
-        {imgUrl:require('./img/icon_home1_03.png'),name:'通知公告',url:Url.Notice},
+        {imgUrl:require('./img/icon_home2_03.png'),name:'待办事件',route:'ToDoList'},
+        {imgUrl:require('./img/icon_home3_03.png'),name:'事件上报',route:Url.IncidentManagement},
+       {imgUrl:require('./img/icon_home5_03.png'),name:'日程安排',route:Url.BaseUrl},
+        {imgUrl:require('./img/icon_home1_03.png'),name:'通知公告',routeurl:Url.Notice},
         
-        {imgUrl:require('./img/icon_home6_03.png'),name:'工作日志',url:Url.BaseUrl},
-        {imgUrl:require('./img/icon_home7_02.png'),name:'人员定位',url:Url.BaseUrl},
-         {imgUrl:require('./img/icon_home9_02.png'),name:'任务管理',url:Url.BaseUrl},
-        {imgUrl:require('./img/icon_home8_02.png'),name:'新闻资讯',url:Url.BaseUrl},
+        {imgUrl:require('./img/icon_home6_03.png'),name:'工作日志',route:Url.BaseUrl},
+        {imgUrl:require('./img/icon_home7_02.png'),name:'人员定位',route:Url.BaseUrl},
+         {imgUrl:require('./img/icon_home9_02.png'),name:'任务管理',route:Url.BaseUrl},
+        {imgUrl:require('./img/icon_home8_02.png'),name:'新闻资讯',route:Url.BaseUrl},
       //  {imgUrl:require('./img/icon_home9_02.png'),name:''}
     ]
       }) 
@@ -70,7 +70,7 @@ export default class Grid extends Component<{}> {
        <View style={styles.grid}>
           {this.state.imgList.map((item,index)=>{
             return <TouchableOpacity style={styles.item} key={index}
-               onPress={() => this.props.navigation.navigate('SubPage', {url: item.url})}
+               onPress={() => this.props.navigation.navigate(item.route)}
             >
                 <Image source={item.imgUrl}
                  resizeMode='contain'

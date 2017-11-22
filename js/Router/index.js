@@ -3,7 +3,7 @@ import Home from '../containers/Home'
 import Pm from '../containers/Pm'
 import My from '../containers/My'
 import SubPage from '../containers/SubPage'
-
+import ToDoList from '../containers/ToDoList'
 const TabLayout = TabNavigator({
   Home: { screen: Home },
   Pm: { screen: Pm },
@@ -36,8 +36,8 @@ const Router = StackNavigator({
   Layout: {
     screen: TabLayout
   },
-  SubPage:{
-  screen: SubPage  
+  ToDoList:{
+  screen: ToDoList  
   }
 
 
