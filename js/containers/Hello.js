@@ -10,7 +10,7 @@ import {
 
 export default class extends Component {
   render(){
-    retunr(
+    return(
       <View></View>
     )
   }
