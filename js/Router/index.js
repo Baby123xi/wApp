@@ -5,6 +5,7 @@ import My from '../containers/My'
 import SubPage from '../containers/SubPage'
 import ToDoList from '../containers/ToDoList'
 import ToDoDetails from '../containers/ToDoList/ToDoDetails'
+import Incident from '../containers/Incident/Incident'
 
 const TabLayout = TabNavigator({
   Home: { screen: Home },
@@ -43,6 +44,8 @@ const Router = StackNavigator({
   },
 ToDoDetails:{
   screen: ToDoDetails  
+  },Incident:{
+  screen: Incident  
   },
 
 }, {

@@ -52,7 +52,7 @@ export default class Grid extends Component<{}> {
         imgList:[
      
         {imgUrl:require('./img/icon_home2_03.png'),name:'待办事件',route:'ToDoList'},
-        {imgUrl:require('./img/icon_home3_03.png'),name:'事件上报',route:Url.IncidentManagement},
+        {imgUrl:require('./img/icon_home3_03.png'),name:'事件上报',route:'Incident'},
        {imgUrl:require('./img/icon_home5_03.png'),name:'日程安排',route:Url.BaseUrl},
         {imgUrl:require('./img/icon_home1_03.png'),name:'通知公告',routeurl:Url.Notice},
         
