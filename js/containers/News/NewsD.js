@@ -15,7 +15,7 @@ export default class extends Component {
   render(){
     return(
       <View style={{flex:1,backgroundColor:'#fff'}}>
-         <Header title={"待办事件详情"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
+         <Header title={"详情"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
          {/* <Text>state: {this.props.navigation.state.params.id}</Text> */}
          <View style={{paddingVertical:10,paddingHorizontal:10,borderBottomWidth:1,borderColor:'#eee'}}>
              <Text style={{lineHeight:30,fontSize:16,color:'#222'}}>标题标题标题标题标题标题标题标题标题标题标题标题</Text>

@@ -16,7 +16,7 @@ const styles = {
   grid:{
     paddingVertical:10,
     backgroundColor:"#fff",
-    justifyContent:'space-between', 
+   
    alignItems:'center',
    flexWrap:'wrap',
    width,
@@ -51,15 +51,15 @@ export default class Grid extends Component<{}> {
         this.setState({
         imgList:[
      
-        {imgUrl:require('./img/icon_home2_03.png'),name:'待办事件',route:'ToDoList'},
-        {imgUrl:require('./img/icon_home3_03.png'),name:'事件上报',route:'Incident'},
-       {imgUrl:require('./img/icon_home5_03.png'),name:'日程安排',route:Url.BaseUrl},
-        {imgUrl:require('./img/icon_home1_03.png'),name:'通知公告',routeurl:Url.Notice},
+        {imgUrl:require('./img/icon_home2_03.png'),name:'事件管理',route:'Incident'},
+        {imgUrl:require('./img/icon_home3_03.png'),name:'事件上报',route:'IncidentPost'},
+       {imgUrl:require('./img/icon_home5_03.png'),name:'日程安排',route:'Scheduling'},
+        {imgUrl:require('./img/icon_home1_03.png'),name:'通知公告',route:'Notice'},
         
         {imgUrl:require('./img/icon_home6_03.png'),name:'工作日志',route:Url.BaseUrl},
-        {imgUrl:require('./img/icon_home7_02.png'),name:'人员定位',route:Url.BaseUrl},
-         {imgUrl:require('./img/icon_home9_02.png'),name:'任务管理',route:Url.BaseUrl},
-        {imgUrl:require('./img/icon_home8_02.png'),name:'新闻资讯',route:Url.BaseUrl},
+        {imgUrl:require('./img/icon_home7_02.png'),name:'走访轨迹',route:'Visit'},
+        //  {imgUrl:require('./img/icon_home9_02.png'),name:'任务管理',route:Url.BaseUrl},
+        {imgUrl:require('./img/icon_home8_02.png'),name:'新闻资讯',route:'News'},
       //  {imgUrl:require('./img/icon_home9_02.png'),name:''}
     ]
       }) 

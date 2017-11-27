@@ -1,0 +1,296 @@
+<html lang="en"> 
+<head> 
+	<meta charset="utf-8" /> 
+	<title>路书</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=3,user-scalable=yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	<script src="http://api.map.baidu.com/api?v=2.0&ak=rMPGykpUAvmKXFFu6L21v3zG73yIMvKT"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js"></script>
+
+	<link rel="stylesheet" href="./mui.min.css">
+	<script src="./mui.min.js"></script>
+	<script src="./jquery-1.8.0.min.js"></script>
+	<script src="./app.js"></script>
+	<script src="./config.js"></script>
+	<script src="./json2.js"></script>
+	<script src="./common/timeFormat.js"></script>
+		<style>
+		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#map_canvas{width:100%;	height:100%}
+		#result {width:100%}
+		.buttons{
+			margin-top: 50px;
+			display:none
+		}
+			.mui-scroll-wrapper{
+				top:43px
+			}
+		</style>
+	
+</head> 
+
+<body> 
+	<header class="mui-bar mui-bar-nav">
+		<!--	<a class="mui-action-menu mui-icon mui-icon-upload mui-pull-right" id="po"> </a>-->
+			<a class="mui-action-back mui-icon mui-icon-back mui-pull-left" style="color: #fff;"></a>
+			<h1 id="title" class="mui-title" style="color:#fff;">走访轨迹</h1>
+	</header>
+	<div id="map_canvas"></div> 
+	<div id="result"></div>
+	<div class="buttons">
+	<button id="run">开始</button> 
+	<button id="stop">停止</button> 
+	<button id="pause">暂停</button> 
+	<button id="hide">隐藏信息窗口</button> 
+	<button id="show">展示信息窗口</button> 
+	</div>
+	<script> 
+	var map = new BMap.Map('map_canvas');
+	map.enableScrollWheelZoom();
+	map.centerAndZoom(new BMap.Point(120.21937542,30.25924446), 18);
+	map.setCenter(new BMap.Point(120.21937542,30.25924446));
+	var gl=new BMap.Geolocation();
+	  gl.getCurrentPosition(function(point,accuracy){
+	  	console.log("point----"+JSON.stringify(point));	
+	  	console.log("accuracy----"+accuracy)
+	  })
+	var lushu;
+	// 实例化一个驾车导航用来生成路线
+    var drv = new BMap.DrivingRoute(new BMap.Point(120.21937542,30.25924446), {
+        onSearchComplete: function(res) {
+            if (drv.getStatus() == BMAP_STATUS_SUCCESS) {
+                var plan = res.getPlan(0);
+                var arrPois =[];
+                for(var j=0;j<plan.getNumRoutes();j++){
+                    var route = plan.getRoute(j);
+                    arrPois= arrPois.concat(route.getPath());
+                    
+                }
+                map.addOverlay(new BMap.Polyline(arrPois, {strokeColor: '#111'}));
+                map.setViewport(arrPois);
+                var sj=['路滑,导致两车相撞','组织青少年学习健康教育','停水问题解决','路面有积水']
+                var t=0;
+             for(var i=0;i<arrPois.length;i++){
+		       if(i%35==1){
+		       	var str=sj[t++];
+		       	var label = new BMap.Label(str,{offset:new BMap.Size(-20,-50)});
+	          
+		       	var point = new BMap.Point(arrPois[i]['lng'],arrPois[i]['lat']);
+		          addMarker(point,label,str);
+		       }
+	}
+                lushu = new BMapLib.LuShu(map,arrPois,{
+                defaultContent:"",//"从天安门到百度大厦"
+                autoView:true,//是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
+               // icon: new BMap.Icon("http://lbsyun.baidu.com/jsdemo/img/fox.gif", new BMap.Size(300,157)),
+                speed: 500,
+                enableRotation:false,//是否设置marker随着道路的走向进行旋转
+                landmarkPois: [
+                   {lng:120.14569551437,lat:30.294745428055,html:'加油站',pauseTime:2},
+                   {lng:116.315391,lat:39.964429,html:'高速公路收费<div><img src="http://map.baidu.com/img/logo-map.gif"/></div>',pauseTime:3},
+                   {lng:116.381476,lat:39.974073,html:'肯德基早餐<div><img src="http://ishouji.baidu.com/resource/images/map/show_pic04.gif"/></div>',pauseTime:2}
+                ]});          
+            }
+        }
+    });
+    // 编写自定义函数,创建标注
+	function addMarker(point,label,str){
+	  var marker = new BMap.Marker(point);
+	    marker.setLabel(label);
+	    marker.addEventListener("click",function(){
+//	    	alert("事件详情"+str);
+	    });
+	  map.addOverlay(marker);
+	}
+
+	
+		
+	
+	drv.search('杭州文一路白荡海', '杭州东站');
+	//绑定事件
+	$("run").onclick = function(){
+		lushu.start();
+	}
+	$("stop").onclick = function(){
+		lushu.stop();
+	}
+	$("pause").onclick = function(){
+		lushu.pause();
+	}
+	$("hide").onclick = function(){
+		lushu.hideInfoWindow();
+	}
+	$("show").onclick = function(){
+		lushu.showInfoWindow();
+	}
+	function $(element){
+		return document.getElementById(element);
+	}
+</script> 
+</body> 
+</html> 
+
+<!--<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-1.8.0.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/json2.js"></script>
+		<script src="../js/common/timeFormat.js"></script>
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			.mui-scroll-wrapper{
+				top:43px
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-menu mui-icon mui-icon-upload mui-pull-right" id="po"> </a>
+			<a class="mui-action-back mui-icon mui-icon-back mui-pull-left"></a>
+			<h1 id="title" class="mui-title">走访轨迹</h1>
+		</header>
+		<div class="mui-content">
+				
+				<div id="pullrefresh"   class="mui-content mui-scroll-wrapper" >
+					<div class="mui-scroll"> 
+					
+						<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+						</ul>
+					</div>
+				</div>
+		</div>
+		 
+		<script>
+			mui.plusReady(function() {
+				mui.init({
+					swipeBack: false,
+					pullRefresh: {
+						container: '#pullrefresh',
+						up: {
+							contentrefresh: '正在加载...',
+							callback: pullupRefresh
+						}
+					}
+				});
+				var userid = plus.storage.getItem("userid");
+				var count = 0;
+				/**
+				 * 上拉加载具体业务实现
+				 */
+				var indexPage = 1;
+				var isMore = false;
+				
+				//解析数据字典
+				var dataAll= plus.storage.getItem("dataAll");
+				dataAll=eval('('+dataAll+')');
+				var data=dataAll['data'];
+				function getCodeName(code){
+					if(data!=null){
+						for(var a=0;a<data.length;a++){
+							if(data[a].code==code){
+								return data[a].name;
+							}
+						}
+					}
+				}
+				function getProcess(code){
+					if(code=='002001'){
+						return '<span style="color: darkred;font-size: 12px;">处理中</span>';
+					}
+					if(code=='002002'){
+						return '<span style="color: darkgreen;font-size: 12px;">完结</span>';
+					}
+				}
+				
+				function pullupRefresh() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(isMore); //参数为true代表没有更多数据了。
+						var table = document.body.querySelector('.mui-table-view');
+						mui.ajax(ip + "phone/pvisit!list", {
+							data: {
+								indexPage: indexPage,
+								userid:userid
+							},
+							dataType: 'json', //服务器返回json格式数据
+							type: 'post', //HTTP请求类型 
+							timeout: 10000, //超时时间设置为10秒；
+							success: function(json) {
+								//服务器返回响应，根据响应结果，分析是否登录成功；
+								indexPage++;
+								if (json != null && json.length > 0) {
+									for (var a = 0; a < json.length; a++) {
+										var li = document.createElement('li');
+										var photo = json[a].photo;
+										if (photo != null && photo.length > 0) {
+											var pp = photo.split(",");
+											photo = pp[0];
+											photo= ip + 'upload/' + photo;
+										} else {
+											photo = '../images/nimg.jpg';
+										}
+										li.className = 'mui-table-view-cell';
+										li.innerHTML = '<div id="aff'+a+'" class="mui-table"><div class="mui-table-cell mui-col-xs-10"> <h4 class="mui-ellipsis">'+json[a].address+'</h4><h5>走访记录：'+json[a].visitContent+'</h5><p class="mui-h6 mui-ellipsis">走访人：'+json[a].createByName+'</p></div><div class="mui-table-cell mui-col-xs-2 mui-text-right" style="width:100px"> <span class="mui-h5" >'+ (new Date(json[a].createTime)).pattern("yyyy-MM-dd HH:mm:ss")+'<br/>'+toWeek((new Date(json[a].createTime)).pattern("yyyy-MM-dd HH:mm:ss"))+'</span> </div> </div>';
+										table.appendChild(li);
+										var aObj = document.getElementById("aff" + a);
+										aObj._json = json[a];
+										aObj.onclick = function() {
+											showFact("/people/visistDetails.html", "民情工作簿", "", "visistDetails", this._json);
+										}
+									}
+								}else {
+									isMore = true;
+								}
+							},
+							error: function(xhr, type, errorThrown) {
+								//异常处理； 
+								if (type == 'timeout') {
+									plus.nativeUI.toast("无法连接服务器，请检查网络！",{duration:"long"}); 
+								}
+								console.log(type);
+							}
+						});
+					}, 1500);
+				}
+				if (mui.os.plus) {
+					mui.plusReady(function() {
+						setTimeout(function() {
+							mui('#pullrefresh').pullRefresh().pullupLoading();
+						}, 500);
+					});
+				} else {
+					mui.ready(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					});
+				}
+				document.getElementById('po').addEventListener('tap', function() {
+					 showFact('/people/visit_barcode.html','走访上报','','visit_barcode');
+					});
+			});
+			
+			function toWeek(data){
+				var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+				var dateStr = data;
+				var myDate = new Date(Date.parse(dateStr.replace(/-/g, "/")));	
+				return weekDay[myDate.getDay()];
+			}
+		</script>
+	</body>
+
+</html>-->

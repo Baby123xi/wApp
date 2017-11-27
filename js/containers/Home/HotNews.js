@@ -42,15 +42,20 @@ let newsList = [
     { "title": '美国总统特朗普结束在韩国访问 启程来华(图)', "time": '2017-08-09', "from": '新浪',img:'http://n.sinaimg.cn/sports/20171108/ONLo-fynmzrs7905513.jpg' }
 ]
 export default class HotNews extends Component<{}> {
+    constructor(props){
+        super(props)
+    }
     render() {
+       
         return <View style={styles.hotbox}>
             <View style={styles.topHeader}>
                 <Text style={styles.title}>热点新闻</Text>
-                <Text style={styles.more}>更多</Text>
+                <Text style={styles.more}
+                onPress={() => this.props.navigation.navigate("NewsD",{id: this.props.news.id})}>更多</Text>
             </View>
          
             {
-                newsList.map((item, index) => <NewsItem key={index}   news={item} index={index}/>)
+                newsList.map((item, index) => <NewsItem key={index}   news={item} index={index}  navigation={this.props.navigation}/>)
 
             }
 

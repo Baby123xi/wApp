@@ -2,10 +2,18 @@ import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import Home from '../containers/Home'
 import Pm from '../containers/Pm'
 import My from '../containers/My'
-import SubPage from '../containers/SubPage'
-import ToDoList from '../containers/ToDoList'
-import ToDoDetails from '../containers/ToDoList/ToDoDetails'
+
+
+import Notice from '../containers/Notice/Notice'
+import NoticeD from '../containers/Notice/NoticeD'
 import Incident from '../containers/Incident/Incident'
+import IncidentD from '../containers/Incident/IncidentD'
+import IncidentPost from '../containers/Incident/IncidentPost'
+import Scheduling from '../containers/Scheduling/Scheduling'
+import SchedulingD from '../containers/Scheduling/SchedulingD'
+import News from '../containers/News/News'
+import NewsD from '../containers/News/NewsD'
+import Visit from '../containers/Visit/Visit'
 
 const TabLayout = TabNavigator({
   Home: { screen: Home },
@@ -39,14 +47,38 @@ const Router = StackNavigator({
   Layout: {
     screen: TabLayout
   },
-  ToDoList:{
-  screen: ToDoList  
+  Notice:{
+    screen: Notice  
+ },
+  NoticeD:{
+  screen: NoticeD  
   },
-ToDoDetails:{
-  screen: ToDoDetails  
-  },Incident:{
+
+  Incident:{
   screen: Incident  
+  },  IncidentD:{
+  screen: IncidentD  
   },
+
+  
+   IncidentPost:{
+    screen: IncidentPost  
+    },
+    Scheduling:{
+      screen: Scheduling  
+  },
+  SchedulingD:{
+    screen: SchedulingD  
+},
+News:{
+  screen: News  
+},
+NewsD:{
+  screen: NewsD  
+},
+Visit:{
+  screen: Visit  
+}
 
 }, {
     navigationOptions: {

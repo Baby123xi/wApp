@@ -32,7 +32,7 @@ export default class extends Component {
   
     return(
       <View style={{flex:1}}>
-            <Header title={"待办事件"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
+            <Header title={"日程安排"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
             <FlatList
                 data={Dao.ToDoList}
                 renderItem={(item)=>this.renderItem(item)}

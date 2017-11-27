@@ -4,7 +4,8 @@ import {
   View,
   Image,
   Text,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 const { width, height } = Dimensions.get('window')
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         height:100,
         backgroundColor:'#fff',
-        paddingHorizontal:15,
+      
         borderBottomWidth:1,
         borderColor:'#ededed'   
     },
@@ -49,9 +50,11 @@ export default class extends Component {
        super(props)
     }
   renderItem_1(){
+     
       return (
       <View style={{paddingHorizontal:15,backgroundColor:'#fff', borderBottomWidth:1,
-        borderColor:'#ededed'}}>
+        borderColor:'#ededed'}}
+        onPress={() => this.props.navigation.navigate("NewsD",{id: this.props.news.id})}>
                 <Image
                   style={{height:150}}
                   source={{ uri:this.props.news.img }}
@@ -69,7 +72,9 @@ export default class extends Component {
   }
   renderItem_2(){
       return (
-          <View style={styles.newsItem}>
+        <TouchableOpacity
+        activeOpacity={1} style={[styles.newsItem,{paddingHorizontal:15}]}
+          onPress={() => this.props.navigation.navigate("NewsD",{id: this.props.news.id})}>
             <Image
               style={styles.newsImg}
               source={{ uri:this.props.news.img }}
@@ -82,7 +87,7 @@ export default class extends Component {
                      <Text>{this.props.news.time}</Text>
                  </View>
             </View>
-          </View>
+          </TouchableOpacity>
       )
   }
   render(){

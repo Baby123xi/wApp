@@ -63,7 +63,7 @@ export default class Home extends Component<{}> {
                <View style={{position:'relative',top:0,zIndex:1}}>
                 {this.state.isSwiper?<Swiper/>:null}
                 <Grid navigation={this.props.navigation}/>
-                <HotNews/>
+                <HotNews  navigation={this.props.navigation}/>
               </View>
             </ScrollView>
       </View>

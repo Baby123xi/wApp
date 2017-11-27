@@ -38,10 +38,10 @@ export default class extends Component {
     render(){
      
         return <View style={{width,flex:1}}>
-            <Header title={"待办事件"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
+            <Header title={"走访轨迹"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
             <WebView
             ref={'WEBVIEW_REF'}
-            source={require('../../web/IncidentPost.html')}
+            source={require('../../web/Visit/Visit.html')}
             style={{width}}
             startInLoadingState={true} 
            // onNavigationStateChange={(e)=>this._onNavigationStateChange(e)}
