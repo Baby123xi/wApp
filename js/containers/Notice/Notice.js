@@ -19,7 +19,7 @@ export default class extends Component {
       <TouchableOpacity
         activeOpacity={1}
         style={{borderBottomWidth:1,borderColor:'#eee',backgroundColor:'#fff',paddingHorizontal:15,width,height:70,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}
-        onPress={() => this.props.navigation.navigate("ToDoDetails",{id: item.id})}>
+        onPress={() => this.props.navigation.navigate("NoticeD",{id: item.id})}>
             <View style={{flex:1,flexDirection:'column'}}>
                  <Text style={{fontSize:16,color:'#222'}}>{item.title}</Text>
                  <Text style={{fontSize:14,color:'#bbb',marginTop:15}}>{item.time}</Text>

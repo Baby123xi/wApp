@@ -14,6 +14,7 @@ import SchedulingD from '../containers/Scheduling/SchedulingD'
 import News from '../containers/News/News'
 import NewsD from '../containers/News/NewsD'
 import Visit from '../containers/Visit/Visit'
+import Handle from '../containers/Handle/Handle'
 
 const TabLayout = TabNavigator({
   Home: { screen: Home },
@@ -78,8 +79,11 @@ NewsD:{
 },
 Visit:{
   screen: Visit  
-}
+},
 
+Handle:{
+  screen: Handle  
+}
 }, {
     navigationOptions: {
       header: null,

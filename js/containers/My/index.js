@@ -5,6 +5,7 @@ import {
   Text,
   View,
   Image,
+  TouchableOpacity,
   ScrollView
 } from 'react-native';
 
@@ -32,16 +33,20 @@ export default class Home extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
-           <Header title="我的"/>
+           {/* <Header title="我的"/> */}
               <ScrollView scrollEnabled={true} horizontal={false}>
-                    <View style={{paddingHorizontal:15,height:150,backgroundColor:'#4c8def',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                         <View style={{flexDirection:"column",alignItems:'center'}}>
-                            <Image  
-                            source={require('./img/avatar.jpeg')}
-                            style={{height:80,width:80,borderRadius:40}}
-                            />  
-                            <Text style={{marginTop:10,fontSize:16,color:"#fff"}}>用户名</Text> 
-                         </View>      
+                    <View style={{paddingHorizontal:15,height:200,backgroundColor:'#4c8def',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                         <TouchableOpacity
+                          activeOpacity={1}
+                           onPress={() => this.props.navigation.navigate("Handle")}
+                           style={{flexDirection:"column",alignItems:'center'}}>
+                             <Image
+                               
+                            source={require('./img/default.png')}
+                            style={{tintColor:'#fff',height:80,width:80,borderRadius:40}}
+                            />   
+                            <Text style={{marginTop:10,fontSize:16,color:"#fff"}}>立即登录</Text> 
+                         </TouchableOpacity>      
                          {/* <View style={{flexDirection:'row',alignItems:'center'}}>
                              <Text style={{fontSize:18,color:"#fff"}}>查看详情</Text> 
                             <Image  

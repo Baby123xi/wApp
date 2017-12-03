@@ -48,30 +48,29 @@ export default class extends Component {
            result= <TextInput 
              underlineColorAndroid="#fff"
              selectionColor="#303437"
-             style={{flex:1,padding:0,fontSize:16,height:30,color:item.valueColor?item.valueColor:'#303437'}} />;
+             style={{flex:1,padding:0,fontSize:16,height:50,color:item.valueColor?item.valueColor:'#303437'}} />;
            break;
            case 'image':
-           result=<Image
-             style={{height:100}}
-             source={item.value}
-             resizeMode='cover'
-            />
+           result=<Text style={{color:"#4c8def"}}>添加</Text>
             break;
             case 'textarea':
-            result=<View style={{flex:1,padding:5,minHeight:100,borderColor:'#eee',borderWidth:1}}>
-                    <Text 
-                     style={{fontSize:16,color:'#303437'}}
-                     >
-                     {item.value}
-                     </Text>
+            result=<View style={{flex:1,padding:5,minHeight:100}}>
+                    
+
+                    <TextInput 
+                    underlineColorAndroid="#fff"
+                    selectionColor="#303437"
+                    style={{borderColor:"#eee",borderWidth:1,flex:1,padding:0,fontSize:16,height:80,color:item.valueColor?item.valueColor:'#303437'}} />
+                   
              </View>
              break;
          }
          
         arr.push(
-         <View key={index} style={{alignItems:'center',marginHorizontal:10,paddingVertical:15,flexDirection:'row',borderBottomColor:'#eee',borderBottomWidth:data.length==(index+1)?0:1}}>
+         <View key={index} style={{alignItems:'center',marginHorizontal:10,minHeight:50,flexDirection:'row',borderBottomColor:'#eee',borderBottomWidth:data.length==(index+1)?0:1}}>
                 <Text style={{fontSize:16,color:'#303437'}}>{item.name}：</Text>
                 {result}
+               
           </View>
         );
       })
@@ -89,12 +88,14 @@ export default class extends Component {
              > 
              <View  style={{flex:1,margin:10,backgroundColor:'#fff',borderRadius:8}}>
                    {this.renderItem()}
-                   {/* <TouchableOpacity
-                       activeOpacity={1}
-                       style={{flex:2,bac}}
-                       >
-                       <Text>提交</Text>
-                   </TouchableOpacity> */}
+                   <View style={{marginVertical:10,justifyContent:'center',alignItems:'center'}}>
+                            <TouchableOpacity
+                        activeOpacity={1}
+                        style={{borderRadius:5,justifyContent:'center',alignItems:'center',width:150,backgroundColor:'#4c8def',paddingVertical:12}}
+                        >
+                        <Text style={{color:'#fff',fontSize:16}}>提交</Text>
+                            </TouchableOpacity> 
+                   </View>
              </View>
                
              </ScrollView>

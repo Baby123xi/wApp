@@ -14,6 +14,7 @@ import Header from '../../components/Header'
 import Swiper from '../../components/Swiper'
 import Grid from './Grid'
 import HotNews from './HotNews'
+import Circle from '../../androidUi/Circle';
 const { width, height } = Dimensions.get('window')
 export default class Home extends Component<{}> {
  static navigationOptions = {
@@ -57,7 +58,7 @@ export default class Home extends Component<{}> {
     return (
       <View style={styles.container}>
             <Header title="网格社区" />
-            <ScrollView scrollEnabled={true} horizontal={false}
+            {/* <ScrollView scrollEnabled={true} horizontal={false}
              //  onScroll={this._onScroll.bind(this)}
              > 
                <View style={{position:'relative',top:0,zIndex:1}}>
@@ -65,7 +66,8 @@ export default class Home extends Component<{}> {
                 <Grid navigation={this.props.navigation}/>
                 <HotNews  navigation={this.props.navigation}/>
               </View>
-            </ScrollView>
+            </ScrollView> */}
+            <Circle style={{width: 100, height: 100}} />
       </View>
     );
   }
