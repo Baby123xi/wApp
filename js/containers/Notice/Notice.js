@@ -12,6 +12,12 @@ const { width, height } = Dimensions.get('window')
 import Header from '../../components/Header'
 import Dao from '../../Dao'
 export default class extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      nociceList: []
+    }
+  }
 
  renderItem(data){
   let item=data.item;
@@ -28,6 +34,32 @@ export default class extends Component {
       </TouchableOpacity>
   )
  }
+ componentDidMount(){
+  fetch('http://121.40.241.28:7070/zhxz/app/newsAction.action?affType=HR')
+  .then((response) => response.json())
+      .then((responseJson) => {
+            console.log(responseJson.data)
+          if(responseJson.result == "fail") {
+             this.setState({
+              nociceList: []
+             })
+          }else if(responseJson.result=="success"){
+             this.setState({
+              nociceList: responseJson.data
+          })
+          //       responseJson.data.map((item,index)=>{
+          //     console.log(item);
+          //      this.titles.push(item.lpName);
+          //      this.imgs=
+          //      this.setState({
+          //          isSwiper:true
+          //      })
+          
+             
+          //   })} 
+          }
+      })
+}
   render(){
   
     return(
