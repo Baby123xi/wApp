@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 const { width, height } = Dimensions.get('window')
-
+import {MapView} from 'react-native-amap3d'
 import Header from '../../components/Header'
 export default class extends Component {
     constructor(props){
@@ -123,12 +123,12 @@ export default class extends Component {
                <View style={{backgroundColor:'#fff',paddingHorizontal:10,flex:1,justifyContent:'space-between',alignItems:'center',flexDirection:'row',height:55,borderBottomWidth:1,borderColor:'#eee'}}>
                   <Text style={{fontSize:16, color:'#141514'}}>详细地址:</Text>
                    <TextInput 
-                       textAlignVertical ='top'
-                       placeholder="问题描述"
+                        textAlignVertical ='center'
+                        placeholder=""
                         underlineColorAndroid="transparent"
                         selectionColor="#303437"
                         multiline ={true}
-                        style={{border:0,backgroundColor:'#fff',paddingVertical:5,paddingHorizontal:5,flex:1,padding:0,fontSize:16,color:'#303437'}} />
+                        style={{borderWidth:0,textAlign:'center',backgroundColor:'#fff',paddingHorizontal:5,flex:1,fontSize:16,color:'#303437'}} />
                       
               </View>
               <View  style={{padding:10,marginVertical:10,alignItems:'center',minHeight:50,flexDirection:'column',borderColor:'#bbb',borderBottomWidth:1}}>
@@ -198,26 +198,31 @@ export default class extends Component {
        )
    }
     render(){
-     
+ 
         return <View style={{width,flex:1,backgroundColor:'#f9f8f7'}}>
             <Header title={"事件上报"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
+              <MapView
+                locationEnabled
+                locationInterval={1000*60}
+                onLocation={({nativeEvent}) =>
+                    console.log(nativeEvent.location.split('#'))}
+                />
+                
             <ScrollView 
               scrollEnabled={true}
               horizontal={false}
              style={{flex:1}}
              //  onScroll={this._onScroll.bind(this)}
              > 
-             <View  style={{flex:1,borderRadius:8}}>
+           
                  {this.renderContent()}
-                   <View style={{marginVertical:10,justifyContent:'center',alignItems:'center'}}>
-                       
-                   </View>
-             </View>
+                  
+           
                
              </ScrollView>
               <TouchableOpacity
                         activeOpacity={1}
-                        style={{height:50,justifyContent:'center',alignItems:'center',backgroundColor:'#4c8def',paddingVertical:12}}
+                        style={{height:50,justifyContent:'center',alignItems:'center',backgroundColor:'#4c8def'}}
                         >
                           <Text style={{color:'#fff',fontSize:16,fontWeight:'bold'}}>提 交</Text>
              </TouchableOpacity> 
