@@ -14,23 +14,24 @@ const styles = {
   },
 
   slide: {
-     height:height*0.28,
+     height:height*0.3,
     backgroundColor: 'transparent'
   },
   container: {
-      height:height*0.28,
+      height:height*0.3,
+      backgroundColor:'#fff'
   },
 
   imgBackground: {
     width,
-    height:height*0.28,
+    height:height*0.3,
     backgroundColor: 'transparent',
     position: 'absolute'
   },
 
   image: {
     width,
-      height:height*0.28,
+     height:height*0.3,
   }
 }
 

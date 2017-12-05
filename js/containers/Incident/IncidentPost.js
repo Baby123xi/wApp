@@ -11,14 +11,15 @@ import {
   
   TouchableOpacity
 } from 'react-native'
-
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 const { width, height } = Dimensions.get('window')
+
 import Header from '../../components/Header'
 export default class extends Component {
     constructor(props){
         super(props)
         this.state={
-          
+           value: 0
          
         }
     }
@@ -26,6 +27,7 @@ export default class extends Component {
 
    
   renderItem(){
+  
       let data=[
           {name:'事务类型',value:'教育工作',isType:'text'},
           {name:'紧急程度',value:'常规',valueColor:'#6ca36c',isType:'text'},
@@ -55,14 +57,12 @@ export default class extends Component {
             break;
             case 'textarea':
             result=<View style={{flex:1,padding:5,minHeight:100}}>
-                    
-
-                    <TextInput 
-                    underlineColorAndroid="#fff"
-                    selectionColor="#303437"
-                    style={{borderColor:"#eee",borderWidth:1,flex:1,padding:0,fontSize:16,height:80,color:item.valueColor?item.valueColor:'#303437'}} />
-                   
-             </View>
+                        <TextInput 
+                        underlineColorAndroid="#fff"
+                        selectionColor="#303437"
+                        style={{borderColor:"#eee",borderWidth:1,flex:1,padding:0,fontSize:16,height:80,color:item.valueColor?item.valueColor:'#303437'}} />
+                       
+                   </View>
              break;
          }
          
@@ -76,29 +76,151 @@ export default class extends Component {
       })
       return arr;
   }
+
+   renderContent(){
+    
+       return(
+           <View style={{flex:1}}>
+              <View style={{marginTop:10,backgroundColor:'#fff',paddingHorizontal:10,flex:1,justifyContent:'space-between',alignItems:'center',flexDirection:'row',height:55,borderBottomWidth:1,borderColor:'#eee'}}>
+                  <Text style={{fontSize:16, color:'#141514'}}>事件接收人:</Text>
+                   <TouchableOpacity
+                           activeOpacity={1}
+                           style={{marginHorizontal:10,height:38,alignItems:'center',justifyContent:'center'}}
+                           >
+                              <Text style={{fontSize:16,color:'#bbb'}}>点击选择</Text>
+                              
+                  </TouchableOpacity>
+                  <Image 
+                  style={{height:20,width:20,tintColor:'#141514'}}
+                  source={require('../../img/leftIcon.png')}/>
+              </View>
+               <View style={{backgroundColor:'#fff',paddingHorizontal:10,flex:1,justifyContent:'space-between',alignItems:'center',flexDirection:'row',height:55,borderBottomWidth:1,borderColor:'#eee'}}>
+                  <Text style={{fontSize:16, color:'#141514'}}>走访时间:</Text>
+                   <TouchableOpacity
+                           activeOpacity={1}
+                           style={{marginHorizontal:10,height:38,alignItems:'center',justifyContent:'center'}}
+                           >
+                              <Text style={{fontSize:16,color:'#bbb'}}>点击选择</Text>
+                              
+                  </TouchableOpacity>
+                  <Image 
+                  style={{height:20,width:20,tintColor:'#141514'}}
+                  source={require('../../img/leftIcon.png')}/>
+              </View>
+               <View style={{marginTop:10,backgroundColor:'#fff',paddingHorizontal:10,flex:1,justifyContent:'space-between',alignItems:'center',flexDirection:'row',height:55,borderBottomWidth:1,borderColor:'#eee'}}>
+                  <Text style={{fontSize:16, color:'#141514'}}>选择位置:</Text>
+                   <TouchableOpacity
+                           activeOpacity={1}
+                           style={{marginHorizontal:10,height:38,alignItems:'center',justifyContent:'center'}}
+                           >
+                              <Text style={{fontSize:16,color:'#bbb'}}>点击选择</Text>
+                              
+                  </TouchableOpacity>
+                  <Image 
+                  style={{height:20,width:20,tintColor:'#141514'}}
+                  source={require('../../img/leftIcon.png')}/>
+              </View>
+               <View style={{backgroundColor:'#fff',paddingHorizontal:10,flex:1,justifyContent:'space-between',alignItems:'center',flexDirection:'row',height:55,borderBottomWidth:1,borderColor:'#eee'}}>
+                  <Text style={{fontSize:16, color:'#141514'}}>详细地址:</Text>
+                   <TextInput 
+                       textAlignVertical ='top'
+                       placeholder="问题描述"
+                        underlineColorAndroid="transparent"
+                        selectionColor="#303437"
+                        multiline ={true}
+                        style={{border:0,backgroundColor:'#fff',paddingVertical:5,paddingHorizontal:5,flex:1,padding:0,fontSize:16,color:'#303437'}} />
+                      
+              </View>
+              <View  style={{padding:10,marginVertical:10,alignItems:'center',minHeight:50,flexDirection:'column',borderColor:'#bbb',borderBottomWidth:1}}>
+                   <Text style={{fontSize:16, color:'#141514'}}>事件类型</Text>
+                 
+                    <View style={{marginTop:10,paddingHorizontal:20,flex:1,flexDirection:'row'}}>
+                         <TouchableOpacity
+                           activeOpacity={1}
+                           style={{marginHorizontal:10,backgroundColor:'#4c8def',width:100,borderRadius:5,borderWidth:1,borderColor:'#bbb',height:38,alignItems:'center',justifyContent:'center'}}
+                           >
+                              <Text style={{fontSize:14,color:'#fff'}}>社会矛盾排查</Text>
+                          </TouchableOpacity>
+                            <TouchableOpacity
+                           activeOpacity={1}
+                           style={{marginHorizontal:10,backgroundColor:'#eee',width:100,borderRadius:5,height:38,borderWidth:1,borderColor:'#bbbbbb',alignItems:'center',justifyContent:'center'}}
+                           >
+                              <Text style={{fontSize:14,color:'#333'}}>重点人员管理</Text>
+                          </TouchableOpacity>
+                    </View>
+                 </View>
+                  <View  style={{padding:10,marginVertical:10,alignItems:'center',minHeight:50,flexDirection:'column',borderColor:'#bbb',borderBottomWidth:1}}>
+                   <Text style={{fontSize:16, color:'#141514'}}>紧急程度</Text>
+                 
+                    <View style={{marginTop:10,flex:1,flexDirection:'row'}}>
+                         <TouchableOpacity
+                           activeOpacity={1}
+                           style={{marginHorizontal:10,width:100,backgroundColor:'#eee',borderRadius:5,borderWidth:1,borderColor:'#bbbbbb',height:38,alignItems:'center',justifyContent:'center'}}
+                           >
+                              <Text style={{fontSize:14,color:'#333'}}>一般</Text>
+                          </TouchableOpacity>
+                            <TouchableOpacity
+                           activeOpacity={1}
+                           style={{marginHorizontal:10,width:100,borderRadius:5,backgroundColor:'#4c8def',height:38,alignItems:'center',justifyContent:'center'}}
+                           >
+                              <Text style={{fontSize:14,color:'#fff'}}>紧急</Text>
+                          </TouchableOpacity>
+                    </View>
+                 </View>
+
+                 <View  style={{padding:10,marginVertical:10,alignItems:'center',minHeight:50,flexDirection:'column',borderColor:'#bbbbbb',borderBottomWidth:1}}>
+                   <Text style={{fontSize:16, color:'#141514'}}>问题描述</Text>
+                 
+                    <View style={{marginTop:10,flex:1,flexDirection:'row'}}>
+                       <TextInput 
+                       textAlignVertical ='top'
+                       placeholder="问题描述"
+                        underlineColorAndroid="transparent"
+                        selectionColor="#303437"
+                        multiline ={true}
+                        style={{backgroundColor:'#fff',borderRadius:5,paddingVertical:5,paddingHorizontal:5,width:'90%',borderColor:"#bbb",borderWidth:1,padding:0,fontSize:16,minHeight:120,color:'#303437'}} />
+                      
+                    </View>
+                 </View>
+                   <View  style={{padding:10,marginVertical:10,alignItems:'center',minHeight:50,flexDirection:'column'}}>
+                   <Text style={{fontSize:16, color:'#141514'}}>图片上传</Text>
+                 
+                    <TouchableOpacity
+                      activeOpacity={1}
+                     style={{justifyContent:'center',alignItems:'center',borderRadius:5,height:80,width:120,borderColor:'#bbb',borderWidth:1,marginTop:10,flex:1,flexDirection:'row'}}>
+                    
+                        <Image
+                         style={{height:40,width:40,tintColor:'#bbb'}}
+                        source={require('../../img/add.png')}/>
+                    </TouchableOpacity>
+                 </View>
+           </View>
+       )
+   }
     render(){
      
-        return <View style={{width,flex:1}}>
+        return <View style={{width,flex:1,backgroundColor:'#f9f8f7'}}>
             <Header title={"事件上报"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
             <ScrollView 
               scrollEnabled={true}
               horizontal={false}
-             
+             style={{flex:1}}
              //  onScroll={this._onScroll.bind(this)}
              > 
-             <View  style={{flex:1,margin:10,backgroundColor:'#fff',borderRadius:8}}>
-                   {this.renderItem()}
+             <View  style={{flex:1,borderRadius:8}}>
+                 {this.renderContent()}
                    <View style={{marginVertical:10,justifyContent:'center',alignItems:'center'}}>
-                            <TouchableOpacity
-                        activeOpacity={1}
-                        style={{borderRadius:5,justifyContent:'center',alignItems:'center',width:150,backgroundColor:'#4c8def',paddingVertical:12}}
-                        >
-                        <Text style={{color:'#fff',fontSize:16}}>提交</Text>
-                            </TouchableOpacity> 
+                       
                    </View>
              </View>
                
              </ScrollView>
+              <TouchableOpacity
+                        activeOpacity={1}
+                        style={{height:50,justifyContent:'center',alignItems:'center',backgroundColor:'#4c8def',paddingVertical:12}}
+                        >
+                          <Text style={{color:'#fff',fontSize:16,fontWeight:'bold'}}>提 交</Text>
+             </TouchableOpacity> 
         </View>
     }
 }

@@ -6,7 +6,8 @@ import {
   View,
   Image,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  StatusBar
 } from 'react-native';
 
 const { width, height } = Dimensions.get('window')
@@ -18,7 +19,10 @@ export default class Header extends Component<{}> {
    render(){
        return(
            <View style={styles.container}>
-             
+               <StatusBar
+                    backgroundColor="#4c8def"
+                    barStyle="light-content"
+                />
               {this.props.isSub?<TouchableOpacity
               onPress={this.props.leftBtnAction}
               style={{width:45,height:45,justifyContent:'center'}}
