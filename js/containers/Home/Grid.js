@@ -50,9 +50,9 @@ export default class Grid extends Component<{}> {
  
         this.setState({
         imgList:[
-     
-        {imgUrl:require('./img/icon_home2_03.png'),name:'事件管理',route:'Incident'},
         {imgUrl:require('./img/icon_home3_03.png'),name:'事件上报',route:'IncidentPost'},
+        {imgUrl:require('./img/icon_home2_03.png'),name:'事件管理',route:'Incident'},
+        {imgUrl:require('./img/icon_home3_03.png'),name:'待办事项',route:'Incident'},
        {imgUrl:require('./img/icon_home5_03.png'),name:'日程安排',route:'Scheduling'},
         {imgUrl:require('./img/icon_home1_03.png'),name:'通知公告',route:'Notice'},
         
