@@ -60,6 +60,7 @@ export default class Grid extends Component<{}> {
         {imgUrl:require('./img/icon_home7_02.png'),name:'走访轨迹',route:'Visit'},
         //  {imgUrl:require('./img/icon_home9_02.png'),name:'任务管理',route:Url.BaseUrl},
         {imgUrl:require('./img/icon_home8_02.png'),name:'新闻资讯',route:'News'},
+        {imgUrl:require('./img/icon_home8_02.png'),name:'测试web',route:'SubPage'}
       //  {imgUrl:require('./img/icon_home9_02.png'),name:''}
     ]
       }) 

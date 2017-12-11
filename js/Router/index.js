@@ -15,6 +15,7 @@ import News from '../containers/News/News'
 import NewsD from '../containers/News/NewsD'
 import Visit from '../containers/Visit/Visit'
 import Handle from '../containers/Handle/Handle'
+import SubPage from '../containers/SubPage/SubPage'
 
 const TabLayout = TabNavigator({
   Home: { screen: Home },
@@ -83,13 +84,18 @@ Visit:{
 
 Handle:{
   screen: Handle  
-}
+},
+
+SubPage:{
+  screen: SubPage  
+},
 }, {
     navigationOptions: {
       header: null,
       gesturesEnabled: true
     }
-  }
+  },
+  
 );
 
 

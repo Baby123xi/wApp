@@ -13,14 +13,19 @@ import {
 } from 'react-native'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 const { width, height } = Dimensions.get('window')
+import DatePicker from 'react-native-datepicker'
 import {MapView} from 'react-native-amap3d'
 import Header from '../../components/Header'
 export default class extends Component {
     constructor(props){
         super(props)
         this.state={
-           value: 0
-         
+           value: 0,
+            x:'',
+            y:'',
+            address:'',
+       
+           date:new Date()
         }
     }
 
@@ -96,35 +101,54 @@ export default class extends Component {
               </View>
                <View style={{backgroundColor:'#fff',paddingHorizontal:10,flex:1,justifyContent:'space-between',alignItems:'center',flexDirection:'row',height:55,borderBottomWidth:1,borderColor:'#eee'}}>
                   <Text style={{fontSize:16, color:'#141514'}}>走访时间:</Text>
-                   <TouchableOpacity
-                           activeOpacity={1}
-                           style={{marginHorizontal:10,height:38,alignItems:'center',justifyContent:'center'}}
-                           >
-                              <Text style={{fontSize:16,color:'#bbb'}}>点击选择</Text>
+              
+                              <DatePicker
+                                style={{flex:1,borderBottomWidth:0}}
+                                date={this.state.date}
+                                mode="datetime"
+                                placeholder="select date"
+                                format="YYYY-MM-DD h:mm a " 
+                                minDate="1969-10-01"
+                                maxDate="2100-10-01"
+                                confirmBtnText="Confirm"
+                                cancelBtnText="Cancel"
+                                customStyles={{
+                                dateIcon: {
+                                    position: 'absolute',
+                                    left: 0,
+                                    top: 4,
+                                   width:0
+                                },
+                                dateInput: {
+                                   
+                                    borderWidth:0
+                                }
+                                // ... You can check the source to find the other keys.
+                                }}
+                                onDateChange={(date) => {this.setState({date: date})}}
+                            />
                               
-                  </TouchableOpacity>
-                  <Image 
-                  style={{height:20,width:20,tintColor:'#141514'}}
-                  source={require('../../img/leftIcon.png')}/>
+               
+             
               </View>
                <View style={{marginTop:10,backgroundColor:'#fff',paddingHorizontal:10,flex:1,justifyContent:'space-between',alignItems:'center',flexDirection:'row',height:55,borderBottomWidth:1,borderColor:'#eee'}}>
-                  <Text style={{fontSize:16, color:'#141514'}}>选择位置:</Text>
+                  <Text style={{fontSize:16, color:'#141514'}}>当前位置:</Text>
                    <TouchableOpacity
                            activeOpacity={1}
-                           style={{marginHorizontal:10,height:38,alignItems:'center',justifyContent:'center'}}
+                           style={{flex:1,marginHorizontal:10,alignItems:'center',justifyContent:'center'}}
                            >
-                              <Text style={{fontSize:16,color:'#bbb'}}>点击选择</Text>
+                              <Text style={{padding:0,fontSize:14,color:'#f00'}}>{this.state.address}</Text>
                               
                   </TouchableOpacity>
-                  <Image 
+                  {/* <Image 
                   style={{height:20,width:20,tintColor:'#141514'}}
-                  source={require('../../img/leftIcon.png')}/>
+                  source={require('../../img/leftIcon.png')}/> */}
               </View>
                <View style={{backgroundColor:'#fff',paddingHorizontal:10,flex:1,justifyContent:'space-between',alignItems:'center',flexDirection:'row',height:55,borderBottomWidth:1,borderColor:'#eee'}}>
                   <Text style={{fontSize:16, color:'#141514'}}>详细地址:</Text>
                    <TextInput 
                         textAlignVertical ='center'
-                        placeholder=""
+                        placeholder="请输入具体地点"
                         underlineColorAndroid="transparent"
                         selectionColor="#303437"
                         multiline ={true}
@@ -197,17 +221,43 @@ export default class extends Component {
            </View>
        )
    }
+
+   getAdress(x,y){
+   console.log(x);
+  fetch('https://restapi.amap.com/v3/geocode/regeo?output=JSON&location='+x+','+y+'&key=c6b70797ff62556ba45964d2c1516745&radius=1000&extensions=base')
+    .then((response) => response.json())
+        .then((responseJson) => {
+              console.log(responseJson)
+            if(responseJson.status==1){ 
+                this.setState({
+                    address:responseJson.regeocode.formatted_address,
+                    x,
+                    y
+                })
+            }
+           
+        })
+            .catch(e=>{
+                 console.log(e)
+            })
+   }
+
+  
     render(){
  
         return <View style={{width,flex:1,backgroundColor:'#f9f8f7'}}>
             <Header title={"事件上报"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
               <MapView
                 locationEnabled
-                locationInterval={1000*60}
-                onLocation={({nativeEvent}) =>
-                    console.log(nativeEvent.location.split('#'))}
-                />
-                
+               locationInterval={1000*60*1}
+                onLocation={({nativeEvent}) =>{
+                   console.log(nativeEvent.latitude+'------'+nativeEvent.longitude);
+                    this.getAdress(nativeEvent.longitude,nativeEvent.latitude);
+                 }}
+               />
+       
+      
+         
             <ScrollView 
               scrollEnabled={true}
               horizontal={false}
