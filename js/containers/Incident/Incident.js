@@ -14,12 +14,21 @@ import Dao from '../../Dao'
 import IncidentItem from  './IncidentItem'
 const { width, height } = Dimensions.get('window')
 export default class extends Component {
+<<<<<<< HEAD
   // constructor(props){
   //   super(props)
   //   this.state={
   //     data:[]
   //   }
   // }
+=======
+  constructor(props){
+    super(props)
+    this.state={
+      data:[]
+    }
+  }
+>>>>>>> a1d58cfe7d70dc0c8bbe65d5123256a7f9692702
   renderCount(){
     let items=[
       {name:'待处理',number:10,bg:'#dd524d'},
@@ -27,7 +36,11 @@ export default class extends Component {
       {name:'已处理',number:100,bg:'#4cda64'}
 
     ]
+<<<<<<< HEAD
     // let items= arrThings
+=======
+ 
+>>>>>>> a1d58cfe7d70dc0c8bbe65d5123256a7f9692702
    return(
            <View style={{height:55,flexDirection:'row',alignItems:'center'}}>
                 {items.map((item,index)=>{
@@ -78,7 +91,7 @@ export default class extends Component {
             <FlatList
                 data={Dao.ToDoList}
                 renderItem={(item)=><IncidentItem item={item}  navigation={this.props.navigation}/>}
-                keyExtractor={(item, index) => item.id}
+                keyExtractor={(item, index) =>index}
              />
       </View>
     )

@@ -41,7 +41,7 @@ export default class extends Component {
             <Header title={"待办事件"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
             <WebView
             ref={'WEBVIEW_REF'}
-            source={require('../../web/IncidentPost.html')}
+            source={{uri:'http://192.168.2.104:8080/#/home'}}
             style={{width}}
             startInLoadingState={true} 
            // onNavigationStateChange={(e)=>this._onNavigationStateChange(e)}

@@ -25,17 +25,18 @@ const { width, height } = Dimensions.get('window')
 function IncidentItem(props){
   
 
-  let item=props.item;
+  let item=props.item.item;
   let obj=selectStatus(item.status);
   let itemColor=obj.color;
   let itemStr=obj.str;
+  console.log(item);
   return(
       <TouchableOpacity
         activeOpacity={1}
         style={{borderBottomWidth:1,borderColor:'#eee',backgroundColor:'#fff',paddingHorizontal:15,width,height:95,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}
         onPress={() =>props.navigation.navigate("IncidentD",{id: item.id})}>
             <View style={{marginRight:5,flex:1,flexDirection:'column'}}>
-                 <Text ellipsizeMode='tail' numberOfLines={1} style={{fontSize:16,color:'#222'}}>{item.title}dsadsadasdasdasdsadsadsadasdas</Text>
+                 <Text ellipsizeMode='tail' numberOfLines={1} style={{fontSize:16,color:'#222'}}>{item.title}</Text>
                  <View style={{flexDirection:'column'}}>
                       <View style={{flexDirection:'row',marginTop:5}}>
                             <Text ellipsizeMode='tail' style={{fontSize:14,color:'#919193'}}>反映人：张三</Text>
