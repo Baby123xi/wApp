@@ -20,14 +20,14 @@ export default class extends Component {
       data:[]
     }
   }
-  renderCount(arrThings){
-    // let items=[
-    //   {name:'待处理',number:10,bg:'#dd524d'},
-    //   {name:'处理中',number:0,bg:'#efad4d'},
-    //   {name:'已处理',number:100,bg:'#4cda64'}
+  renderCount(){
+    let items=[
+      {name:'待处理',number:10,bg:'#dd524d'},
+      {name:'处理中',number:0,bg:'#efad4d'},
+      {name:'已处理',number:100,bg:'#4cda64'}
 
-    // ]
-    let items= arrThings
+    ]
+ 
    return(
            <View style={{height:55,flexDirection:'row',alignItems:'center'}}>
                 {items.map((item,index)=>{
@@ -74,11 +74,11 @@ export default class extends Component {
     return(
       <View style={{flex:1,backgroundColor:'#eee'}}>
             <Header title={"事件管理"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
-            {this.renderCount(this.state.data)}
+            {this.renderCount()}
             <FlatList
                 data={Dao.ToDoList}
                 renderItem={(item)=><IncidentItem item={item}  navigation={this.props.navigation}/>}
-                keyExtractor={(item, index) => item.id}
+                keyExtractor={(item, index) =>index}
              />
       </View>
     )
