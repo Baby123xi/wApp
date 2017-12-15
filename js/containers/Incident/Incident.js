@@ -14,20 +14,20 @@ import Dao from '../../Dao'
 import IncidentItem from  './IncidentItem'
 const { width, height } = Dimensions.get('window')
 export default class extends Component {
-  constructor(props){
-    super(props)
-    this.state={
-      data:[]
-    }
-  }
-  renderCount(arrThings){
-    // let items=[
-    //   {name:'待处理',number:10,bg:'#dd524d'},
-    //   {name:'处理中',number:0,bg:'#efad4d'},
-    //   {name:'已处理',number:100,bg:'#4cda64'}
+  // constructor(props){
+  //   super(props)
+  //   this.state={
+  //     data:[]
+  //   }
+  // }
+  renderCount(){
+    let items=[
+      {name:'待处理',number:10,bg:'#dd524d'},
+      {name:'处理中',number:0,bg:'#efad4d'},
+      {name:'已处理',number:100,bg:'#4cda64'}
 
-    // ]
-    let items= arrThings
+    ]
+    // let items= arrThings
    return(
            <View style={{height:55,flexDirection:'row',alignItems:'center'}}>
                 {items.map((item,index)=>{
@@ -43,38 +43,38 @@ export default class extends Component {
            </View>
       )
   }
-  componentDidMount(){
-    fetch('http://121.40.241.28:7070/zhxz/app/newsAction.action?affType=HR')
-    .then((response) => response.json())
-        .then((responseJson) => {
-              console.log(responseJson.data)
-            if(responseJson.result == "fail") {
-               this.setState({
-                 data: []
-               })
-            }else if(responseJson.result=="success"){
-               this.setState({
-               data:responseJson.data
-            })
-            //       responseJson.data.map((item,index)=>{
-            //     console.log(item);
-            //      this.titles.push(item.lpName);
-            //      this.imgs=
-            //      this.setState({
-            //          isSwiper:true
-            //      })
+  // componentDidMount(){
+  //   fetch('http://121.40.241.28:7070/zhxz/app/newsAction.action?affType=HR')
+  //   .then((response) => response.json())
+  //       .then((responseJson) => {
+  //             console.log(responseJson.data)
+  //           if(responseJson.result == "fail") {
+  //              this.setState({
+  //                data: []
+  //              })
+  //           }else if(responseJson.result=="success"){
+  //              this.setState({
+  //              data:responseJson.data
+  //           })
+  //           //       responseJson.data.map((item,index)=>{
+  //           //     console.log(item);
+  //           //      this.titles.push(item.lpName);
+  //           //      this.imgs=
+  //           //      this.setState({
+  //           //          isSwiper:true
+  //           //      })
             
                
-            //   })} 
-            }
-        })
-  }
+  //           //   })} 
+  //           }
+  //       })
+  // }
  
   render(){
     return(
       <View style={{flex:1,backgroundColor:'#eee'}}>
             <Header title={"事件管理"} isSub={true} leftBtnAction={()=>this.props.navigation.goBack()}/>
-            {this.renderCount(this.state.data)}
+            {this.renderCount()}
             <FlatList
                 data={Dao.ToDoList}
                 renderItem={(item)=><IncidentItem item={item}  navigation={this.props.navigation}/>}
